@@ -4,6 +4,7 @@ import './Header.css'
 
 function Header() {
   const [scrolled, setScrolled] = useState(false)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const location = useLocation()
 
   useEffect(() => {
@@ -14,6 +15,11 @@ function Header() {
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
+
+  // Close mobile menu when route changes
+  useEffect(() => {
+    setMobileMenuOpen(false)
+  }, [location])
 
   const scrollToSection = (e, targetId) => {
     e.preventDefault()
@@ -34,7 +40,16 @@ function Header() {
               <img src="/images/WhatsApp Image 2026-02-16 at 16.09.18.jpeg" alt="Logo" />
             </Link>
           </div>
-          <div className="nav-menu">
+          <button 
+            className={`hamburger ${mobileMenuOpen ? 'active' : ''}`}
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Toggle navigation menu"
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+          <div className={`nav-menu ${mobileMenuOpen ? 'active' : ''}`}>
             <Link to="/">Home</Link>
             {isHomePage ? (
               <a href="#why-solar-panda" onClick={(e) => scrollToSection(e, '#why-solar-panda')}>About</a>
@@ -43,11 +58,6 @@ function Header() {
             )}
             <Link to="/products">Products</Link>
             <Link to="/solar-inverter-systems">Solar Inverter Systems</Link>
-            {isHomePage ? (
-              <a href="#contact" onClick={(e) => scrollToSection(e, 'footer')}>Contact</a>
-            ) : (
-              <Link to="/#contact">Contact</Link>
-            )}
           </div>
         </div>
       </nav>

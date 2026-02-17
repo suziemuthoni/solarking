@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import './PurchaseForm.css'
 
 function PurchaseForm({ productName, isOpen, onClose }) {
@@ -8,6 +8,14 @@ function PurchaseForm({ productName, isOpen, onClose }) {
     location: '',
     paymentMethod: 'loan-to-own'
   })
+  const modalRef = useRef(null)
+
+  // Scroll to top when modal opens
+  useEffect(() => {
+    if (isOpen && modalRef.current) {
+      modalRef.current.scrollTop = 0
+    }
+  }, [isOpen])
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -53,7 +61,7 @@ Please note: A processing fee is required for an agent to be assigned and to pro
 
   return (
     <div className="form-overlay" onClick={onClose}>
-      <div className="form-modal" onClick={(e) => e.stopPropagation()}>
+      <div className="form-modal" ref={modalRef} onClick={(e) => e.stopPropagation()}>
         <button className="close-btn" onClick={onClose}>×</button>
         
         <div className="form-header">
