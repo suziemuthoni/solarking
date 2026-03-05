@@ -43,7 +43,7 @@ Please note: A processing fee is required for an agent to be assigned and to pro
     const encodedMessage = encodeURIComponent(message)
     
     // Redirect to WhatsApp Business
-    window.open(`https://wa.me/254747933969?text=${encodedMessage}`, '_blank')
+    window.open(`https://wa.me/254786094642?text=${encodedMessage}`, '_blank')
     
     // Close form
     onClose()

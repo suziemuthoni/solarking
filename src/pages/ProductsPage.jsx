@@ -38,6 +38,14 @@ function ProductsPage() {
     }
   ]
 
+  const solarAppliancesProducts = [
+    {
+      name: 'Kastom Solar Water Heater',
+      description: 'Efficient solar thermal water heating system for reliable hot water supply powered by the sun',
+      image: '/images/300-Liters-Pressurized-Flat-Plate-Indirect-Premium-Solar-Water-Heater.png'
+    }
+  ]
+
   const inverterProducts = [
     {
       name: 'PowerPlay Pro',
@@ -95,6 +103,27 @@ function ProductsPage() {
           <h2 className="category-title">Solar Home Systems and Appliances</h2>
           <div className="products-grid">
             {homeProducts.map((product, index) => (
+              <div key={index} className="product-card">
+                <div className="product-image">
+                  <img src={product.image} alt={product.name} />
+                </div>
+                <div className="product-info">
+                  <h3>{product.name}</h3>
+                  <p>{product.description}</p>
+                  <button className="btn" onClick={() => setSelectedProduct(product.name)}>Get Quote</button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Solar Appliances Products Grid */}
+      <section className="products-grid-section">
+        <div className="container">
+          <h2 className="category-title">Solar Appliances</h2>
+          <div className="products-grid">
+            {solarAppliancesProducts.map((product, index) => (
               <div key={index} className="product-card">
                 <div className="product-image">
                   <img src={product.image} alt={product.name} />
